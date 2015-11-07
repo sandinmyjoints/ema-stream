@@ -9,7 +9,7 @@ example - module
 ## numbers source
 
 ```js
-var emaStream = require('./ema-stream');
+var emaStream = require('ema-stream');
 
 var ema = emaStream();
 
@@ -38,7 +38,7 @@ etc
 ## json source
 
 ```javascript
-var emaStream = require('./index');
+var emaStream = require('ema-stream');
 
 var ema = emaStream({
   pluck: ['key1', 'key2']
