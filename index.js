@@ -11,7 +11,9 @@ module.exports = function (opts) {
     refreshEvery: 1000 // 1 second.
   });
 
-  opts.integers = opts.integers === 'false' ? false : true;
+  if (typeof opts.integers === 'string') {
+    opts.integers = opts.integers === 'false' ? false : true;
+  }
 
   var keys = opts.pluck;
   if (!keys) {
