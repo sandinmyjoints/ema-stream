@@ -1,6 +1,6 @@
 {
   "name": "ema-stream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Exponential moving average from a stream.",
   "repository": {
     "type": "git",
