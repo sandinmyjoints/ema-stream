@@ -99,7 +99,7 @@ $ counter
 3
 ^C
 
-$ counter | ./ema-stream.js
+$ counter | ema-stream
 3 # Output is refreshed every second. 3, 10, 19, 28, etc.
 
 ```
@@ -114,7 +114,7 @@ $ tail -f logfile.log
 ^C
 
 # Pluck only the keys we're interested in.
-$ tail -f logfile.log | ./ema-stream.js --pluck wallTime,dbConnections
+$ tail -f logfile.log | ema-stream --pluck wallTime,dbConnections
 {"wallTime":62,"dbConnections":42} # Ouput is refreshed every second.
 ```
 
