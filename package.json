@@ -2,6 +2,10 @@
   "name": "ema-stream",
   "version": "1.0.0",
   "description": "Exponential moving average from a stream.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sandinmyjoints/ema-stream"
+  },
   "main": "index.js",
   "bin": "ema-stream.js",
   "keywords": [
