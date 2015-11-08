@@ -3,6 +3,9 @@ ema-stream
 
 Exponential moving average from a stream. Module and command line.
 
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+![Travis](https://travis-ci.org/sandinmyjoints/ema-stream.svg?branch=master)
+
 example - module
 ================
 
