@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/sandinmyjoints/ema-stream"
   },
+  "scripts": {
+    "test": "standard"
+  },
   "main": "index.js",
   "bin": "ema-stream.js",
   "keywords": [
@@ -25,5 +28,8 @@
     "minimist": "1.2.0",
     "moving-average": "0.0.5",
     "through2": "2.0.0"
+  },
+  "devDependencies": {
+    "standard": "5.3.1"
   }
 }

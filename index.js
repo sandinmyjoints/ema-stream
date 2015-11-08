@@ -1,7 +1,7 @@
-var movingAverage = require('moving-average');
-var through = require('through2');
-var defaults = require('lodash.defaults');
-var debug = require('debug')('ema');
+var movingAverage = require('moving-average')
+var through = require('through2')
+var defaults = require('lodash.defaults')
+var debug = require('debug')('ema')
 
 module.exports = function (opts) {
   opts = defaults(opts || {}, {
@@ -9,59 +9,59 @@ module.exports = function (opts) {
     pluck: null,
     integers: true,
     refreshEvery: 1000 // 1 second.
-  });
+  })
 
   if (typeof opts.integers === 'string') {
-    opts.integers = opts.integers === 'false' ? false : true;
+    opts.integers = opts.integers !== 'false'
   }
 
-  var keys = opts.pluck;
+  var keys = opts.pluck
   if (!keys) {
-    keys = [ 'default' ];
+    keys = [ 'default' ]
   }
-  debug('opts', opts);
+  debug('opts', opts)
 
   var maMap = keys.reduce(function (memo, k) {
-    memo[k] = movingAverage(opts.window);
-    return memo;
-  }, {});
-  debug('ma', maMap);
+    memo[k] = movingAverage(opts.window)
+    return memo
+  }, {})
+  debug('ma', maMap)
 
   function emit () {
-    var obj = {};
+    var obj = {}
     keys.forEach(function (key) {
-      var current = maMap[key].movingAverage();
+      var current = maMap[key].movingAverage()
       if (opts.integers) {
-        current = Math.round(current);
+        current = Math.round(current)
       }
-      obj[key] = current;
-    });
+      obj[key] = current
+    })
 
-    var payload;
+    var payload
     if (opts.pluck) {
-      payload = JSON.stringify(obj);
+      payload = JSON.stringify(obj)
     } else {
-      payload = obj.default.toString();
+      payload = obj.default.toString()
     }
-    this.push(payload + '\n');
+    this.push(payload + '\n')
   }
 
   var stream = through(function (chunk, enc, cb) {
-    var val;
+    var val
 
     keys.forEach(function (key) {
       if (opts.pluck) {
-        val = JSON.parse(chunk)[key];
+        val = JSON.parse(chunk)[key]
       } else {
-        val = chunk;
+        val = chunk
       }
-      maMap[key].push(Date.now(), val);
-    });
+      maMap[key].push(Date.now(), val)
+    })
 
-    cb();
-  });
+    cb()
+  })
 
-  setInterval(emit.bind(stream), opts.refreshEvery);
+  setInterval(emit.bind(stream), opts.refreshEvery)
 
-  return stream;
-};
+  return stream
+}
