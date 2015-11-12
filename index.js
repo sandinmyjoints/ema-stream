@@ -61,7 +61,11 @@ module.exports = function (opts) {
     cb()
   })
 
-  setInterval(emit.bind(stream), opts.refreshEvery)
+  var looper = setInterval(emit.bind(stream), opts.refreshEvery)
+  stream.on('end', function () {
+    debug('clearInterval')
+    clearInterval(looper)
+  })
 
   return stream
 }
