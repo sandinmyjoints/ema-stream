@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-var emaStream = require('./index')
+var split2 = require('split2')
 var logUpdate = require('log-update')
+var emaStream = require('./index')
 var opts = require('minimist')(process.argv.slice(2))
 
 if (opts.pluck) {
@@ -10,7 +11,7 @@ if (opts.pluck) {
 
 var ema = emaStream(opts)
 
-process.stdin.pipe(ema)
+process.stdin.pipe(split2()).pipe(ema)
 
 ema.on('readable', function () {
   logUpdate(ema.read())

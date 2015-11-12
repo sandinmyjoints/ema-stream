@@ -27,6 +27,7 @@
     "log-update": "1.0.2",
     "minimist": "1.2.0",
     "moving-average": "0.0.5",
+    "split2": "1.0.0",
     "through2": "2.0.0"
   },
   "devDependencies": {
