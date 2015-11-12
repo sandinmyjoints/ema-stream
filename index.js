@@ -8,12 +8,19 @@ module.exports = function (opts) {
     window: 60 * 1000, // 1 minute.
     pluck: null,
     integers: true,
-    refreshEvery: 1000 // 1 second.
+    refreshEvery: 1000, // 1 second.
+    emitFirstValue: false
   })
 
-  if (typeof opts.integers === 'string') {
-    opts.integers = opts.integers !== 'false'
-  }
+  var booleanKeys = [
+    'integers',
+    'emitFirstValue'
+  ]
+  booleanKeys.forEach(function (booleanKey) {
+    if (typeof opts[booleanKey] === 'string') {
+      opts[booleanKey] = opts[booleanKey] !== 'false'
+    }
+  })
 
   var keys = opts.pluck
   if (!keys) {
@@ -46,6 +53,8 @@ module.exports = function (opts) {
     this.push(payload + '\n')
   }
 
+  var firstTime = true
+
   var stream = through(function (chunk, enc, cb) {
     var val
 
@@ -57,6 +66,11 @@ module.exports = function (opts) {
       }
       maMap[key].push(Date.now(), val)
     })
+
+    if (opts.emitFirstValue && firstTime) {
+      firstTime = false
+      emit.call(this)
+    }
 
     cb()
   })

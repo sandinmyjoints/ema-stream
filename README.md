@@ -88,6 +88,8 @@ Create a new stream instance `ema` with options `opts`:
   incoming chunks is assumed to be numbers.
 * `opts.integers: true` - Whether to round output.
 * `opts.refreshEvery: 1000` - How often to emit current average in ms.
+* `opts.emitFirstValue: false` - Whether to emit on the first value or wait
+  until the first window has passed to emit the first time.
 
 example - command line
 ======================
@@ -130,4 +132,6 @@ $ ema-stream \
   --refreshEvery 1000 # How often to refresh current average in ms.
   --pluck # Comma-separated list of keys to pluck from incoming JSON. If
   unspecified, input is assumed to be numbers.
+  --emitFirstValue false # Whether to emit on the first value or wait
+  until the first window has passed to emit the first time.
 ```
